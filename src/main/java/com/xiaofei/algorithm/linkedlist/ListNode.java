@@ -8,11 +8,8 @@ public class ListNode {
     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
 
     public static void printAllList(ListNode listNode){
-        while (true){
+        while (listNode != null){
             System.out.println(listNode.val);
-            if (listNode.next == null){
-                break;
-            }
             listNode = listNode.next;
         }
     }
@@ -27,6 +24,18 @@ public class ListNode {
         }
         return dummy.next;
     }
+
+    public static ListNode creatNodeByReverse(int length){
+        ListNode dummy = new ListNode(-1);
+        ListNode tail = dummy;
+        for (int i = length; i > 0; i--) {
+            ListNode node = new ListNode(i);
+            tail.next = node;
+            tail = node;
+        }
+        return dummy.next;
+    }
+
     public static int getNodeLength(ListNode head){
         ListNode current = head;
         int count = 0;
