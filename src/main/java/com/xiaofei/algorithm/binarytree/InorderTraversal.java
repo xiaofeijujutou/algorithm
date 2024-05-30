@@ -18,7 +18,6 @@ public class InorderTraversal {
     }
     private final List<Integer> list = new ArrayList<>();
     private void inorder(TreeNode node) {
-
         if (node.left != null){
             inorder(node.left);
         }
@@ -26,6 +25,5 @@ public class InorderTraversal {
         if (node.right != null){
             inorder(node.right);
         }
-
     }
 }
