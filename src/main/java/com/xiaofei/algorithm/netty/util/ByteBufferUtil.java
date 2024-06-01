@@ -94,6 +94,19 @@ public class ByteBufferUtil {
         System.out.printf("position: [%d], limit: [%d]\n", buffer.position(), buffer.limit());
         System.out.println(builder);
     }
+    /**
+     * 复制ByteBuffer,然后打印;
+     * @param buffer
+     */
+    public static void copyRead(ByteBuffer buffer) {
+        ByteBuffer copy = ByteBuffer.allocate(buffer.capacity());
+        for (int i = 0; i < buffer.capacity(); i++) {
+            copy.put(buffer.get(i));
+        }
+        copy.flip();
+        debugAll(copy);
+    }
+
 
     private static void appendPrettyHexDump(StringBuilder dump, ByteBuffer buf, int offset, int length) {
         if (isOutOfBounds(offset, length, buf.capacity())) {

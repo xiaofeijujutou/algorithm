@@ -1,5 +1,6 @@
 package com.xiaofei.algorithm.netty.util;
 
+import com.google.common.base.Charsets;
 import com.xiaofei.algorithm.Constants;
 import com.xiaofei.algorithm.netty.webio.Server;
 import org.slf4j.Logger;
@@ -10,6 +11,7 @@ import java.net.Socket;
 import java.nio.ByteBuffer;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.nio.charset.Charset;
 import java.nio.charset.CharsetDecoder;
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.StandardCharsets;
@@ -105,6 +107,7 @@ public class NettyUtil {
             SocketChannel channel = SocketChannel.open();
             channel.configureBlocking(false);
             channel.connect(new InetSocketAddress("localhost", port));
+            channel.finishConnect();
             System.out.println("客户端连接成功");
             return channel;
         }catch (Exception e){
@@ -112,12 +115,13 @@ public class NettyUtil {
         }
        return null;
     }
-    public static SocketChannel getClientAndSend(int port) {
+
+    public static SocketChannel getClientAndSend(int port, String msg) {
         SocketChannel client = getClient(port);
         try {
-            client.write(StandardCharsets.UTF_8.encode("hello"));
+            client.write(Charset.defaultCharset().encode(msg));
         } catch (IOException e) {
-           e.printStackTrace();
+            e.printStackTrace();
         }
         return client;
     }
