@@ -14,7 +14,7 @@ import java.nio.channels.SocketChannel;
 
 public class SelectClientTest {
     public static void main(String[] args) throws Exception{
-        SocketChannel client = NettyUtil.getClient();
+        SocketChannel client = NettyUtil.getClientAndSend(Constants.PORT, "头头头头注重组织组织减肥的克拉煞风景的事");
         System.out.println("客户端启动");
         client.close();
     }
