@@ -1,5 +1,7 @@
 package com.xiaofei.algorithm.netty.test;
 
+import com.xiaofei.algorithm.netty.util.ByteBufferUtil;
+
 import java.nio.ByteBuffer;
 import java.util.ArrayDeque;
 import java.util.LinkedList;
@@ -11,10 +13,14 @@ public class PacketCongestion {
         ByteBuffer source = ByteBuffer.allocate(32);
         //                     11            24
         source.put("Hello,world\nI'm zhangsan\nHo".getBytes());
-        split(source);
+        Queue<ByteBuffer> split = split(source);
 
         source.put("w are you?\nhaha!\n".getBytes());
-        split(source);
+        split.addAll(split(source));
+        for (ByteBuffer byteBuffer : split) {
+            ByteBufferUtil.debugAll(byteBuffer);
+        }
+
     }
 
     private static Queue<ByteBuffer> split(ByteBuffer source) {
@@ -35,4 +41,5 @@ public class PacketCongestion {
         source.compact();
         return split;
     }
+
 }
