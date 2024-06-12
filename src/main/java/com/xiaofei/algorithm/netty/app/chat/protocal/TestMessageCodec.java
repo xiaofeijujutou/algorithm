@@ -1,4 +1,4 @@
-package com.xiaofei.algorithm.netty.app.protocal;
+package com.xiaofei.algorithm.netty.app.chat.protocal;
 
 import com.xiaofei.algorithm.netty.app.message.LoginRequestMessage;
 import io.netty.buffer.ByteBuf;
