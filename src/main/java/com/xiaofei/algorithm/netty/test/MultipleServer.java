@@ -77,7 +77,9 @@ public class MultipleServer {
                             sc.configureBlocking(false);
                             log.debug("{} connected", sc.getRemoteAddress());
                             //接受到用户Channel之后使用负载均衡发送给worker
+                            System.out.println("before register....");
                             workers[index.getAndIncrement() % workers.length].register(sc);
+                            System.out.println("after register....");
                         }
                     }
                 } catch (IOException e) {
