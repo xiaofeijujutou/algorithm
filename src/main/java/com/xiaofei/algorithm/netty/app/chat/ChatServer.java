@@ -2,14 +2,15 @@ package com.xiaofei.algorithm.netty.app.chat;
 
 
 
+import com.xiaofei.algorithm.Constants;
 import com.xiaofei.algorithm.netty.app.chat.protocal.MessageCodecSharable;
 import com.xiaofei.algorithm.netty.app.chat.protocal.ProtocolFrameDecoder;
 import com.xiaofei.algorithm.netty.app.chat.handler.*;
+import com.xiaofei.algorithm.netty.app.chat.service.UserServiceFactory;
+import com.xiaofei.algorithm.netty.app.message.LoginRequestMessage;
+import com.xiaofei.algorithm.netty.app.message.LoginResponseMessage;
 import io.netty.bootstrap.ServerBootstrap;
-import io.netty.channel.Channel;
-import io.netty.channel.ChannelDuplexHandler;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInitializer;
+import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
@@ -20,13 +21,18 @@ import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
 
+import java.util.Scanner;
+import java.util.concurrent.CountDownLatch;
+
 @Slf4j
 public class ChatServer {
     public static void main(String[] args) {
+        System.out.println("服务器启动!");
         NioEventLoopGroup boss = new NioEventLoopGroup();
         NioEventLoopGroup worker = new NioEventLoopGroup();
         LoggingHandler LOGGING_HANDLER = new LoggingHandler(LogLevel.DEBUG);
         MessageCodecSharable MESSAGE_CODEC = new MessageCodecSharable();
+
         try {
             ServerBootstrap serverBootstrap = new ServerBootstrap();
             serverBootstrap.channel(NioServerSocketChannel.class);
@@ -38,12 +44,21 @@ public class ChatServer {
                     //添加handle,先处理黏包半包,拆分好ByteBuf给下一个
                     ch.pipeline().addLast(new ProtocolFrameDecoder());
                     //日志
-                    ch.pipeline().addLast(LOGGING_HANDLER);
+//                    ch.pipeline().addLast(LOGGING_HANDLER);
                     //从处理好黏包的处理器后拿到完整数据,然后执行解码操作,序列化成对象
                     ch.pipeline().addLast(MESSAGE_CODEC);
+                    //这个SimpleHandle可以只处理泛型对应的数据类型,其他的就会被忽略;
+                    ch.pipeline().addLast(new LoginRequestMessageHandler());//登录,然后绑定
+                    ch.pipeline().addLast(new ChatRequestMessageHandler());//发送消息;
+                    ch.pipeline().addLast(new GroupChatRequestMessageHandler());
+                    ch.pipeline().addLast(new GroupCreateRequestMessageHandler());
+                    ch.pipeline().addLast(new GroupJoinRequestMessageHandler());
+                    ch.pipeline().addLast(new GroupQuitRequestMessageHandler());
+                    ch.pipeline().addLast(new GroupMembersRequestMessageHandler());
+                    ch.pipeline().addLast(new QuitHandler());
                 }
             });
-            Channel channel = serverBootstrap.bind(8080).sync().channel();
+            Channel channel = serverBootstrap.bind(Constants.PORT).sync().channel();
             channel.closeFuture().sync();
         } catch (InterruptedException e) {
             log.error("server error", e);
