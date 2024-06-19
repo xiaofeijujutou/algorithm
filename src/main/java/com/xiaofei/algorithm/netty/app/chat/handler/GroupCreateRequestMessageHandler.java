@@ -1,10 +1,11 @@
 package com.xiaofei.algorithm.netty.app.chat.handler;
 
-import cn.itcast.message.GroupCreateRequestMessage;
-import cn.itcast.message.GroupCreateResponseMessage;
-import cn.itcast.server.session.Group;
-import cn.itcast.server.session.GroupSession;
-import cn.itcast.server.session.GroupSessionFactory;
+
+import com.xiaofei.algorithm.netty.app.chat.session.Group;
+import com.xiaofei.algorithm.netty.app.chat.session.GroupSession;
+import com.xiaofei.algorithm.netty.app.chat.session.GroupSessionFactory;
+import com.xiaofei.algorithm.netty.app.message.GroupCreateRequestMessage;
+import com.xiaofei.algorithm.netty.app.message.GroupCreateResponseMessage;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;

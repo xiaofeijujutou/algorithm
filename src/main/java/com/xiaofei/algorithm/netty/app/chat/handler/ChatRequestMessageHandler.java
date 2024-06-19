@@ -1,8 +1,9 @@
 package com.xiaofei.algorithm.netty.app.chat.handler;
 
-import cn.itcast.message.ChatRequestMessage;
-import cn.itcast.message.ChatResponseMessage;
-import cn.itcast.server.session.SessionFactory;
+
+import com.xiaofei.algorithm.netty.app.chat.session.SessionFactory;
+import com.xiaofei.algorithm.netty.app.message.ChatRequestMessage;
+import com.xiaofei.algorithm.netty.app.message.ChatResponseMessage;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
