@@ -6,9 +6,6 @@ import com.xiaofei.algorithm.Constants;
 import com.xiaofei.algorithm.netty.app.chat.protocal.MessageCodecSharable;
 import com.xiaofei.algorithm.netty.app.chat.protocal.ProtocolFrameDecoder;
 import com.xiaofei.algorithm.netty.app.chat.handler.*;
-import com.xiaofei.algorithm.netty.app.chat.service.UserServiceFactory;
-import com.xiaofei.algorithm.netty.app.message.LoginRequestMessage;
-import com.xiaofei.algorithm.netty.app.message.LoginResponseMessage;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -16,13 +13,7 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-import io.netty.handler.timeout.IdleState;
-import io.netty.handler.timeout.IdleStateEvent;
-import io.netty.handler.timeout.IdleStateHandler;
 import lombok.extern.slf4j.Slf4j;
-
-import java.util.Scanner;
-import java.util.concurrent.CountDownLatch;
 
 @Slf4j
 public class ChatServer {

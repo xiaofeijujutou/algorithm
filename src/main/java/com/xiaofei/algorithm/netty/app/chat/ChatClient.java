@@ -4,21 +4,14 @@ import com.xiaofei.algorithm.Constants;
 import com.xiaofei.algorithm.netty.app.chat.handler.ClientChannelInboundHandlerAdapter;
 import com.xiaofei.algorithm.netty.app.chat.protocal.MessageCodecSharable;
 import com.xiaofei.algorithm.netty.app.chat.protocal.ProtocolFrameDecoder;
-import com.xiaofei.algorithm.netty.app.message.*;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
-
-import java.util.*;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * @Description: Created by IntelliJ IDEA.

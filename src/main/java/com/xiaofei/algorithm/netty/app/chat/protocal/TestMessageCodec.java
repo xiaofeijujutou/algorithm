@@ -1,6 +1,6 @@
 package com.xiaofei.algorithm.netty.app.chat.protocal;
 
-import com.xiaofei.algorithm.netty.app.message.LoginRequestMessage;
+import com.xiaofei.algorithm.netty.app.chat.message.LoginRequestMessage;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufAllocator;
 import io.netty.channel.embedded.EmbeddedChannel;
