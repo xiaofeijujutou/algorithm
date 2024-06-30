@@ -1,4 +1,4 @@
-package com.xiaofei.algorithm.netty.app.message;
+package com.xiaofei.algorithm.netty.app.chat.message;
 
 import lombok.Getter;
 import lombok.ToString;

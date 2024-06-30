@@ -2,7 +2,7 @@ package com.xiaofei.algorithm.netty.app.chat.protocal;
 
 
 import com.xiaofei.algorithm.netty.app.chat.config.Config;
-import com.xiaofei.algorithm.netty.app.message.Message;
+import com.xiaofei.algorithm.netty.app.chat.message.Message;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
